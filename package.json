@@ -1,0 +1,15 @@
+{
+  "name": "magangbackend",
+  "version": "1.0.0",
+  "description": "Backend Bootcamp ramadhan 1442",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Soki",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.14.2"
+  }
+}
