@@ -1,9 +1,28 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
+const path = require('path')
+
+// Register Plugins
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, 'public'),
+  prefix: '/',
+})
+
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, 'public/assets'),
+  prefix: '/assets',
+  decorateReply: false
+})
+
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, 'public/forms'),
+  prefix: '/forms',
+  decorateReply: false
+})
 
 // Declare a route
 fastify.get('/', async (request, reply) => {
-  return { hello: 'world' }
+  /*return*/ reply.sendFile('index.html') // serving path.join(__dirname, 'public', 'index.html') directly
 })
 
 // Declare a route

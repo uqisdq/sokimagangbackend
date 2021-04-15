@@ -5,11 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "Soki",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^3.14.2"
+    "fastify": "^3.14.2",
+    "fastify-static": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "*/node_modules",
+      ".gitignore",
+      "package.json"
+    ]
   }
 }
