@@ -6,7 +6,7 @@ fastify.register(require('fastify-static'), require("./config/static").public)
 
 fastify.register(require('fastify-static'), require("./config/static").assets)
 
-fastify.register(require('fastify-static'), require("./config/static").forms)
+fastify.register(require('fastify-static'), require("./config/static").fkorms)
 
 // Declare a route
 fastify.get('/', async (request, reply) => {
