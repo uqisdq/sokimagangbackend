@@ -23,5 +23,7 @@
       ".gitignore",
       "package.json"
     ]
+  },"engines": {
+    "node": "12.x"
   }
 }
