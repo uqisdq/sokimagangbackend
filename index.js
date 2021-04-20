@@ -4,21 +4,28 @@ const fastify = require('fastify')({ logger: true })
 // Register Plugins
 fastify.register(require('fastify-static'), require("./config/static").public)
 
+fastify.register(require('point-of-view'), {
+  engine: {
+    ejs: require('ejs')
+  }
+})
+
 //fastify.register(require('fastify-static'), require("./config/static").assets)
 
 //fastify.register(require('fastify-static'), require("./config/static").forms)
 
 //Declare a route
-fastify.get('/', async (request, reply) => {
-  /*return*/ reply.sendFile('index.html') // serving path.join(__dirname, 'public', 'index.html') directly
-})
+//fastify.get('/', async (request, reply) => {
+//  /*return*/ reply.sendFile('index.html') // serving path.join(__dirname, 'public', 'index.html') directly
+//})
 
 //Declare a route
-fastify.get('/apaya', async (request, reply) => {
-  return { hello: 'apaya' }
-})
+//fastify.get('/apaya', async (request, reply) => {
+//  return { hello: 'apaya' }
+//})
 
-//fastify.register(require("./routes/route"))
+fastify.register(require("./routes/route"))
+fastify.register(require("./routes/ssr"))
 
 // Run the server!
 const start = async () => {

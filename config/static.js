@@ -14,5 +14,5 @@ module.exports = {
         root: path.join(__dirname, '../public/forms'),
         prefix: '/forms',
         decorateReply: false
-      },
+      }
 }
