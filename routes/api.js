@@ -8,10 +8,12 @@ async function routes(fastify, options) {
         const returnVal = await client.query(
             `CREATE TABLE ${req.query.name} (
                 ID int,
-                LastName varchar(255),
-                FirstName varchar(255),
-                Address varchar(255),
-                City varchar(255)
+                filter varchar(255),
+                imgSrc varchar(255),
+                title varchar(255),
+                summary varchar(255),
+                galleryHref varchar(255),
+                galleryTitle varchar(255)
             );`, 
           [],
         )
