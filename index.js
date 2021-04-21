@@ -4,7 +4,7 @@ const fastify = require('fastify')({ logger: true })
 if (process.env.NODE_ENV !== 'production') //-->Nanit, di fase production, prot akan disediakan cloud provider
   require('dotenv').config(require("./config/env").options.dotenv)
 
-// Register Plugins
+// Register core Plugins
 //fastify.register(require('fastify-env'), require("./config/env").options)
 
 fastify.register(require('fastify-env'), {
@@ -12,7 +12,13 @@ fastify.register(require('fastify-env'), {
   dotenv: false,
 })
 
+fastify.register(require('fastify-postgres'), {
+  connectionString: process.env.PGSTRING,
+  ssl: {rejectUnauthorized: false},
+})
+
 fastify.register(require('fastify-static'), require("./config/static").public)
+
 fastify.register(require('point-of-view'), {
   engine: {
     ejs: require('ejs')
@@ -35,6 +41,7 @@ fastify.register(require('point-of-view'), {
 
 fastify.register(require("./routes/route"))
 fastify.register(require("./routes/ssr"))
+fastify.register(require("./routes/api"),{prefix:"/api"})
 
 // Run the server!
 const start = async () => {

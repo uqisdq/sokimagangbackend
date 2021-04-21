@@ -7,7 +7,7 @@ module.exports = {
         properties: {
           PORT: {
             type: 'string',
-            
+            //default: 3000 --> AKAN DISEDIAKAN SAMA CLOUD PROVIDER NANTI PADA TAHAP PRODUCTION
           },
         },
       },
