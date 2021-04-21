@@ -1,9 +1,8 @@
+const data = require("../data/portofolio.json")
+
 async function routes(fastify, options) {
     fastify.get("/portfolio.html", async (request, reply) => {
-        reply.view('/public/portfolio.ejs', 
-        {
-        desc: 'Holy Shoot Motherfricker',        
-    })
+        reply.view('/public/portfolio.ejs', data)
     })
   }
   

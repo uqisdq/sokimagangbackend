@@ -1,9 +1,18 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
 
-// Register Plugins
-fastify.register(require('fastify-static'), require("./config/static").public)
+if (process.env.NODE_ENV !== 'production') //-->Nanit, di fase production, prot akan disediakan cloud provider
+  require('dotenv').config(require("./config/env").options.dotenv)
 
+// Register Plugins
+//fastify.register(require('fastify-env'), require("./config/env").options)
+
+fastify.register(require('fastify-env'), {
+  ...require("./config/env").options,
+  dotenv: false,
+})
+
+fastify.register(require('fastify-static'), require("./config/static").public)
 fastify.register(require('point-of-view'), {
   engine: {
     ejs: require('ejs')
@@ -30,7 +39,7 @@ fastify.register(require("./routes/ssr"))
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen(process.env.PORT || 5000, "0.0.0.0")
+    await fastify.listen(process.env.PORT, "0.0.0.0")
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
