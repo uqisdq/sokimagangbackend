@@ -4,22 +4,21 @@ async function routes(fastify, options) {
     fastify.get("/portfolio.html", async (request, reply) => {
         const {rows}/*result ->kalo mau secara umum*/ = await fastify.pg.query("SELECT * FROM coba;", [])
         console.log(rows/*{result}*/)
-        reply.view('/public/portfolio.ejs', data), {
+        reply.view("/public/portfolio.ejs", {
             ...data,
-            items: rows.map((el) => {
+            items: rows.map((row) => {
                 return {
-                    filter: el.filter,
-                    imgSrc: el.imgsrc,
-                    title: el.title,
-                    summary: el.summary,
-                    galleryHref: el.galleryHref,
-                    gallerryTitle: el.gallerytitle
+                    filter: row.filter,
+                    imgSrc: row.imgsrc,
+                    title: row.title,
+                    summary: row.summary,
+                    galleryHref: row.galleryhref,
+                    gallerryTitle: row.gallerytitle
 
                 }
-            },
-            ),
-        }
+            }),
+        })
     })
-  }
+}
   
   module.exports = routes

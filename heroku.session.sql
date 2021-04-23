@@ -40,15 +40,16 @@ DROP TABLE coba
 INSERT INTO coba (filter,imgSrc,title,summary,galleryHref,galleryTitle)
 VALUES /*Kalau mau nambah value, tinggal ketik di row baru dengan format sama)*/
     ('filter-app','assets/img/portfolio/DDLL-Poster.jpg','App 1','App','assets/img/portfolio/DDLL-Poster.jpg','App 1')
-
+RETURNING id;
 --@block
 SELECT * FROM coba;
 
 --@block
 UPDATE coba
 SET
-    imgsrc ='assets/img/portofolio/DDLL-Poster.jpg'
+    imgsrc ='assets/img/portfolio/curah_hujan.jpg',
+    galleryHref = 'assets/img/portfolio/curah_hujan.jpg'
 WHERE id = 1;
 
 --@block
-DELETE FROM coba WHERE id=1;
+DELETE FROM coba WHERE id=2;
