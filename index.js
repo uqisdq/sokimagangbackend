@@ -12,7 +12,7 @@ fastify.register(require('fastify-env'), {
   dotenv: false,
 })
 fastify.register(require('fastify-postgres'), {
-  connectionString: process.env.PGSTRING,
+  connectionString: process.env.DATABASE_URL,
   ssl: {rejectUnauthorized: false},
 })
 fastify.register(require('fastify-static'), require("./config/static").public)
