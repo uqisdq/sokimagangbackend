@@ -39,7 +39,9 @@ DROP TABLE coba
 --@block
 INSERT INTO coba (filter,imgSrc,title,summary,galleryHref,galleryTitle)
 VALUES /*Kalau mau nambah value, tinggal ketik di row baru dengan format sama)*/
-    ('filter-app','assets/img/portfolio/DDLL-Poster.jpg','App 1','App','assets/img/portfolio/DDLL-Poster.jpg','App 1')
+    ('filter-app','assets/img/portfolio/DDLL-Poster.jpg','App 1','App','assets/img/portfolio/DDLL-Poster.jpg','App 1'),
+    ('filter-app','assets/img/portfolio/KOMBINASI-POSTER','App 2','App','assets/img/portfolio/KOMBINASI-POSTER.jpg','App 2'),
+    ('filter-app','assets/img/portfolio/longsor-poster.jpg','App 3','App','assets/img/portfolio/longsor-poster.jpg','App 3')
 RETURNING id;
 --@block
 SELECT * FROM coba;

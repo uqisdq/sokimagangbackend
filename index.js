@@ -1,5 +1,5 @@
 // Require the framework and instantiate it
-const fastify = require('fastify')({ logger: false })
+const fastify = require('fastify')({ logger: true })
 
 if (process.env.NODE_ENV !== 'production') //-->Nanit, di fase production, prot akan disediakan cloud provider
   require('dotenv').config(require("./config/env").options.dotenv)
@@ -11,19 +11,17 @@ fastify.register(require('fastify-env'), {
   ...require("./config/env").options,
   dotenv: false,
 })
-
 fastify.register(require('fastify-postgres'), {
   connectionString: process.env.PGSTRING,
   ssl: {rejectUnauthorized: false},
 })
-
 fastify.register(require('fastify-static'), require("./config/static").public)
-
 fastify.register(require('point-of-view'), {
   engine: {
     ejs: require('ejs')
   }
 })
+fastify.register(require('fastify-swagger'), require("./config/swagger"))
 
 //fastify.register(require('fastify-static'), require("./config/static").assets)
 
@@ -41,9 +39,14 @@ fastify.register(require('point-of-view'), {
 
 fastify.register(require("./routes/route"))
 fastify.register(require("./routes/ssr"))
-fastify.register(require("./routes/api"),{prefix:"/api"})
+fastify.register(require("./routes/coba"),{ prefix: "api/coba" })
 
 // Run the server!
+fastify.ready((err) => {
+  if (err) throw err
+  fastify.swagger()
+})
+
 const start = async () => {
   try {
     await fastify.listen(process.env.PORT, "0.0.0.0")
