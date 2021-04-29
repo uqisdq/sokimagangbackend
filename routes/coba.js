@@ -33,7 +33,13 @@ async function routes(fastify, options) {
           "5xx": { ...BasicMessage, description: "Failed response" },
         },
         body: BasicItem,
+        security: [
+          {
+            Bearer: [],
+          },
+        ],
       },
+      preValidation: [fastify.authenticate],
     },
     async (req, reply) => {
       try {
@@ -70,7 +76,13 @@ async function routes(fastify, options) {
         },
         body: BasicItem,
         params: BasicId,
+        security: [
+          {
+            Bearer: [],
+          },
+        ],
       },
+      preValidation: [fastify.authenticate],
     },
     async (req, reply) => {
       try {
@@ -127,10 +139,17 @@ async function routes(fastify, options) {
           "2xx": { ...BasicMessage, description: "Successful item deletion" },
           "5xx": { ...BasicMessage, description: "Failed response" },
         },
+        security: [
+          {
+            Bearer: [],
+          },
+        ],
         params: BasicId,
       },
+      preValidation: [fastify.authenticate],
     },
     async (req, reply) => {
+      console.log(req.user)
       try {
         const returnVal = await fastify.pg.query(
           `DELETE FROM coba WHERE id=$1;`,

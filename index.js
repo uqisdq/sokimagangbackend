@@ -11,17 +11,21 @@ fastify.register(require('fastify-env'), {
   ...require("./config/env").options,
   dotenv: false,
 })
-fastify.register(require('fastify-postgres'), {
-  connectionString: process.env.DATABASE_URL,
-  ssl: {rejectUnauthorized: false},
-})
-fastify.register(require('fastify-static'), require("./config/static").public)
-fastify.register(require('point-of-view'), {
-  engine: {
-    ejs: require('ejs')
+fastify.register(require('fastify-postgres'), require("./config/postgres"));
+fastify.register(require('fastify-static'), require("./config/static").public);
+fastify.register(require('point-of-view'), require("./config/view"));
+fastify.register(require('fastify-swagger'), require("./config/swagger"));
+fastify.register(require('fastify-jwt'), require("./config/jwt"));
+
+fastify.decorate("authenticate", async function(req, reply) {
+  try {
+    //console.log(req.headers)
+    await req.jwtVerify()
+  } catch (err) {
+    reply.send(err)
   }
-})
-fastify.register(require('fastify-swagger'), require("./config/swagger"))
+});
+
 
 //fastify.register(require('fastify-static'), require("./config/static").assets)
 
@@ -39,7 +43,8 @@ fastify.register(require('fastify-swagger'), require("./config/swagger"))
 
 fastify.register(require("./routes/route"))
 fastify.register(require("./routes/ssr"))
-fastify.register(require("./routes/coba"),{ prefix: "api/coba" })
+fastify.register(require("./routes/coba"),{ prefix: "/api/coba" })
+fastify.register(require("./routes/auth"), {prefix: "/api/auth"})
 
 // Run the server!
 fastify.ready((err) => {

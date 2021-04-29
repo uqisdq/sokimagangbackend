@@ -21,6 +21,11 @@ module.exports = {
         name: "Profile",
         description: "Profile items related routes",
       },
+      {
+        name: "Auth",
+        description:
+          "Auth related endpoints, playground for token manipulation",
+      },
     ],
     components: {
       securitySchemes: {

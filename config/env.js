@@ -3,12 +3,15 @@ module.exports = {
       confKey: 'config', // optional, default: 'config'
       schema: {
         type: 'object',
-        required: ['PORT'],
+        required: ['PORT','DATABASE_URL'],
         properties: {
           PORT: {
             type: 'string',
             //default: 3000 --> AKAN DISEDIAKAN SAMA CLOUD PROVIDER NANTI PADA TAHAP PRODUCTION
           },
+          DARABASE_URL: {
+            type: "string",
+          }
         },
       },
       dotenv: {

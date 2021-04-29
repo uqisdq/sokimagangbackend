@@ -1,14 +1,33 @@
 -- CRUD TABLES
 
 --@block
-CREATE TABLE coba/*${req.query.name}*/ (
-                ID SERIAL PRIMARY KEY, /*Serial -> auti-incremented, gausah ngisi lagi*/
-                filter varchar(255),
-                imgSrc varchar(255),
-                title varchar(255),
-                summary varchar(255),
-                galleryHref varchar(255)
-            );
+-- CREATE TABLE coba/*${req.query.name}*/ (
+--                 ID SERIAL PRIMARY KEY, /*Serial -> auti-incremented, gausah ngisi lagi*/
+--                 filter varchar(255),
+--                 imgSrc varchar(255),
+--                 title varchar(255),
+--                 summary varchar(255),
+--                 galleryHref varchar(255)
+--             );
+--@block
+CREATE TABLE user_auth (
+        email VARCHAR(100) PRIMARY KEY,
+        hashed_password varchar(255)
+    );
+
+-- CRUD ROWS FOR USER AUTH
+--@block
+INSERT INTO user_auth (email, hashed_password)
+VALUES 
+    ('admin@admin.com', 'string')
+RETURNING email;
+--@block
+SELECT * FROM user_auth;
+--@block
+SELECT hashed_password FROM user_auth WHERE email='admin@admin.com';
+
+--@block
+DELETE FROM user_auth WHERE email='string'; 
 
 --@block
 SELECT *
@@ -55,3 +74,5 @@ WHERE id = 1;
 
 --@block
 DELETE FROM coba WHERE id=2;
+
+
